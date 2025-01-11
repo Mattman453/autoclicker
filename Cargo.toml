@@ -1,0 +1,22 @@
+[package]
+name = "autoclicker"
+version = "0.1.0"
+edition = "2021"
+
+build = "build.rs"
+
+[profile.release]
+opt-level = 3
+codegen-units = 1
+lto = "fat"
+strip = "symbols"
+
+[dependencies]
+fltk = { version = "1.5.1", features = ["fltk-bundled"] }
+fltk-theme = "0.7.3"
+global-hotkey = "0.6.3"
+mouse-rs = "0.4.2"
+rust-embed = "8.5.0"
+
+[target.'cfg(windows)'.build-dependencies]
+winres = "0.1.12"
