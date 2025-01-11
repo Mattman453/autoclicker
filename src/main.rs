@@ -1,4 +1,4 @@
-#![windows_subsystem = "windows"]
+// #![windows_subsystem = "windows"]
 use fltk::app::App;
 use fltk::button::Button;
 use fltk::enums::Color;
@@ -99,9 +99,26 @@ fn main() {
     win.end();
     win.show();
 
-    let index_png = Asset::get("mouse.png").unwrap();
-    let image = image::PngImage::from_data(&*index_png.data).unwrap();
-    win.set_icon(Some(image));
+    let index_png = match Asset::get("mouse.png") {
+        Some(png) => Some(png),
+        None => {
+            println!("No \"resources/mouse.png\" found. Taskbar icon not set.");
+            None
+        }
+    };
+    if index_png.is_some() {
+        let image = image::PngImage::from_data(&*index_png.unwrap().data);
+        println!("{:#?}", image);
+        if image.is_ok() {
+            win.set_icon(Some(image.unwrap()));
+        } else {
+            println!("Error loading image: {:?}", image.err());
+        }
+    }
+
+    // let index_png = Asset::get("mouse.png").unwrap();
+    // let image = image::PngImage::from_data(&*index_png.data).unwrap();
+    // win.set_icon(Some(image));
 
     let mut thread: JoinHandle<_> = thread::spawn(move || {});
 
