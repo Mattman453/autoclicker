@@ -1,4 +1,4 @@
-# autoclicker
+# AutoClicker
 This program is a simple autoclicker made using fltk. It has a simple time in milliseconds and a stat/stop button. This can be trigerred by pressing the button or pressing F6 on the keyboard.
 
 ## Features
