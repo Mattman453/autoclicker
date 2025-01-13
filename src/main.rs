@@ -108,7 +108,7 @@ fn main() {
     };
     if index_png.is_some() {
         let image = image::PngImage::from_data(&*index_png.unwrap().data);
-        println!("{:#?}", image);
+        // println!("{:#?}", image);
         if image.is_ok() {
             win.set_icon(Some(image.unwrap()));
         } else {
